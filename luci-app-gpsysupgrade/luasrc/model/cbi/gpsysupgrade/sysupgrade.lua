@@ -12,7 +12,7 @@ end
 
 function check_update()
 		needs_update, notice, md5 = false, false, false
-		remote_version = luci.sys.exec("curl -skfL https://mirror.ghproxy.com/https://github.com/ilxp/builder/releases/download/" ..model.. "/vermd5.txt")
+		remote_version = luci.sys.exec("curl -skfL https://mirror.ghproxy.com/https://github.com/ilxp/builder/releases/download/" ..tag.. "/vermd5.txt")
 		updatelogs = luci.sys.exec("curl -skfL https://dl.openwrt.ai/firmware/updatelogs.txt")
 		remoteformat = luci.sys.exec("date -d $(echo \"" ..remote_version.. "\" | tr '\r\n' ',' | awk -F, '{printf $1}' | awk -F. '{printf $3\"-\"$1\"-\"$2}') +%s")
 		fnotice = luci.sys.exec("echo \"" ..remote_version.. "\" | tr '\r\n' ',' | awk -F, '{printf $(NF-1)}'")
@@ -35,12 +35,13 @@ function to_check()
 	currentTimeStamp = luci.sys.exec("expr $(date -d \"$(date '+%Y-%m-%d %H:%M:%S')\" +%s) - 172800")
 	model = target.. "/" ..board_name
     if board_name == "x86_64" then
+    	tag = "firmware"	
     	model = "x86_64"
     	check_update()
     	if fs.access("/sys/firmware/efi") then
-    		download_url = "https://mirror.ghproxy.com/https://github.com/ilxp/builder/releases/download/" ..model.. "/" ..remote_version.. "-OprX-x86-64-generic-squashfs-combined-efi.img.gz"
+    		download_url = "https://mirror.ghproxy.com/https://github.com/ilxp/builder/releases/download/" ..tag.. "/" ..model.. "/" ..remote_version.. "-OprX-x86-64-generic-squashfs-combined-efi.img.gz"
     	else
-    		download_url = "https://mirror.ghproxy.com/https://github.com/ilxp/builder/releases/download/" ..model.. "/" ..remote_version.. "-OprX-x86-64-generic-squashfs-combined-efi.img.gz"
+    		download_url = "https://mirror.ghproxy.com/https://github.com/ilxp/builder/releases/download/" ..tag.. "/" ..model.. "/" ..remote_version.. "-OprX-x86-64-generic-squashfs-combined-efi.img.gz"
     		md5 = ""
     	end
    
