@@ -39,9 +39,9 @@ function to_check()
     	model = "x86_64"
     	check_update()
     	if fs.access("/sys/firmware/efi") then
-    		download_url = "https://mirror.ghproxy.com/https://github.com/ilxp/builder/releases/download/" ..tag.. "/" ..remote_version.. "-openwrt-x86-64-generic-squashfs-combined-efi.img.gz"
+    		download_url = "https://mirror.ghproxy.com/https://github.com/ilxp/builder/releases/download/" ..tag.. "/" ..remote_version.. "-oprx-x86-64-generic-squashfs-combined-efi.img.gz"
     	else
-    		download_url = "https://mirror.ghproxy.com/https://github.com/ilxp/builder/releases/download/" ..tag.. "/" ..remote_version.. "-openwrt-x86-64-generic-squashfs-combined-efi.img.gz"
+    		download_url = "https://mirror.ghproxy.com/https://github.com/ilxp/builder/releases/download/" ..tag.. "/" ..remote_version.. "-oprx-x86-64-generic-squashfs-combined-efi.img.gz"
     		md5 = ""
     	end
    
