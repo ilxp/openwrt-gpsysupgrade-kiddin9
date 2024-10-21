@@ -12,7 +12,7 @@ end
 
 function check_update()
 		needs_update, notice, md5 = false, false, false
-		remote_version = luci.sys.exec("curl -skfL https://ghp.ci/https://raw.githubusercontent.com/ilxp/builder/firmware/vermd5.txt")
+		remote_version = luci.sys.exec("curl -skfL https://ghp.ci/https://github.com/ilxp/oprx-builder/releases/download/firmware/vermd5.txt")
 		updatelogs = luci.sys.exec("curl -skfL https://dl.openwrt.ai/firmware/updatelogs.txt")
 		remoteformat = luci.sys.exec("date -d $(echo \"" ..remote_version.. "\" | tr '\r\n' ',' | awk -F, '{printf $1}' | awk -F. '{printf $3\"-\"$1\"-\"$2}') +%s")
 		fnotice = luci.sys.exec("echo \"" ..remote_version.. "\" | tr '\r\n' ',' | awk -F, '{printf $(NF-1)}'")
